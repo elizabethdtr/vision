@@ -1,3 +1,8 @@
+# Barcode scanner image application
+#
+# Author: Elizabet Dimitrova
+# Issued: 31/03/2020
+
 #import the necessary packages
 from pyzbar import pyzbar
 import argparse

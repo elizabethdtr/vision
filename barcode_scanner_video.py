@@ -1,3 +1,8 @@
+# Barcode scanner image application
+#
+# Author: Elizabet Dimitrova
+# Issued: 31/03/2020
+
 from __future__ import print_function
 from pyzbar import pyzbar as pyzbar
 import numpy as np
