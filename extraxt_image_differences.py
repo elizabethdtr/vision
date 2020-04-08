@@ -30,7 +30,7 @@ print("SSIM: {}".format(score))
 
 # threshold the difference image, find the countours
 thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
-cnts = cv2.findContours(thresh.copy(), cv2.PETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 cnts = imutils.grab_contours(cnts)
 
 # loop over the contours
@@ -43,7 +43,7 @@ for c in cnts:
 imageA = imutils.resize(imageA, width=677)
 imageB = imutils.resize(imageB, width=677)
 diff = imutils.resize(diff, width=677)
-thresh = imutils.resize(tresh, width=677)
+thresh = imutils.resize(thresh, width=677)
 cv2.imshow("Originial", imageA)
 cv2.imshow("Modified", imageB)
 cv2.imshow("Diff", diff)
