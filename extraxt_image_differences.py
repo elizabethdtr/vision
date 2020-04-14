@@ -8,6 +8,9 @@ from skimage.metrics import structural_similarity as ssim
 import argparse
 import imutils
 import cv2
+import time
+
+start = time.time()
 
 # construct the argument parse and parse the argument
 ap = argparse.ArgumentParser()
@@ -46,10 +49,14 @@ diff = imutils.resize(diff, width=677)
 thresh = imutils.resize(thresh, width=677)
 cv2.imshow("Originial", imageA)
 cv2.imshow("Modified", imageB)
-cv2.imshow("Diff", diff)
-cv2.imshow("Thresh", thresh)
+#cv2.imshow("Diff", diff)
+#cv2.imshow("Thresh", thresh)
 
 #cv2.destroyAllWindows()
+
+end = time.time()
+print(end-start)
+
 cv2.waitKey(0)
 	
 	
