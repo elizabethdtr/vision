@@ -33,14 +33,33 @@ print("SSIM: {}".format(score))
 
 # threshold the difference image, find the countours
 thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+#edges = cv2.Canny(diff, 50, 200)
 cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 cnts = imutils.grab_contours(cnts)
 
+minX = 0 
+minY = 0
+maxX = 0
+maxY = 0
+
 # loop over the contours
 for c in cnts:
+
 	(x, y, w, h) = cv2.boundingRect(c)
-	cv2.rectangle(imageA, (x, y), (x+w, y+h), (0,0,255), 2)
+
+	if (x > maxX):
+		maxX = x
+	if (x < minX):
+		minX = x
+	if (y > maxY):
+		maxY = y
+	if (y < minY):
+		minY = y
+		
+	#cv2.rectangle(imageA, (x, y), (x+w, y+h), (0,0,255), 2)
 	cv2.rectangle(imageB, (x, y), (x+w, y+h), (0,0,255), 2)
+	
+#cv2.rectangle(imageA, (minX,minY), (maxX, maxY), (0,0,255), 5)
 	
 # show the output images
 imageA = imutils.resize(imageA, width=677)
@@ -49,15 +68,13 @@ diff = imutils.resize(diff, width=677)
 thresh = imutils.resize(thresh, width=677)
 cv2.imshow("Originial", imageA)
 cv2.imshow("Modified", imageB)
-#cv2.imshow("Diff", diff)
-#cv2.imshow("Thresh", thresh)
-
-#cv2.destroyAllWindows()
+cv2.imshow("Diff", diff)
+cv2.imshow("Thresh", thresh)
 
 end = time.time()
 print(end-start)
 
 cv2.waitKey(0)
-	
+cv2.destroyAllWindows()	
 	
 	

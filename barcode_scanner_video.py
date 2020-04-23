@@ -34,7 +34,7 @@ while True:
 	# grab the frame from the threaded video stream and resize it to
 	# have a maximum width of 400 pixels
 	frame = vs.read()
-	frame = imutils.resize(frame, width=400)
+	frame = imutils.resize(frame, width=600, height=600)
 
 	# find the barcodes in the frame and decode each of the barcodes
 	barcodes = pyzbar.decode(frame)
@@ -44,7 +44,7 @@ while True:
 		# extract the bounding box location of the barcode and draw
 		# the bounding box surrounding the barcode on the image
 		(x, y, w, h) = barcode.rect
-		cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
+		cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 5)
 
 		# the barcode data is a bytes object so if we want to draw it
 		# on our output image we need to convert it to a string first
@@ -55,19 +55,19 @@ while True:
 		text = "{} ({})".format(barcodeData, barcodeType)
 		cv2.putText(frame, text, (x, y - 10),
 			cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-
+		
 		# if the barcode text is currently not in our CSV file, write
 		# the timestamp + barcode to disk and update the set
 		if barcodeData not in found:
-			csv.write("{},{}\n".format(datetime.datetime.now(),
-				barcodeData))
+			csv.write("{} ({})\n".format(barcodeData, barcodeType))
 			csv.flush()
 			found.add(barcodeData)
-
+		
 	# show the output frame
 	cv2.imshow("Barcode Scanner", frame)
+	
 	key = cv2.waitKey(1) & 0xFF
- 
+	
 	# if the `q` key was pressed, break from the loop
 	if key == ord("q"):
 		break

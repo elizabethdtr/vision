@@ -22,13 +22,11 @@ args = vars(ap.parse_args())
 
 #load the image, convert it to grayscale, and detect edges
 template = cv2.imread(args["template"])
-roi = template[1000:1700, 780:1280]
+roi = template[950:1500, 980:1450]
 cv2.imshow("ROI", roi)
 roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
 roi = cv2.Canny(roi, 50, 200)
 (tH, tW) = roi.shape[:2]
-roiTemp = imutils.resize(roi, width=677)
-#cv2.imshow("Template", roi)
 
 
 #loop over the images to find the template in
