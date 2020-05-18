@@ -12,7 +12,6 @@ import cv2
 import time
 
 start = time.time()
-
 #construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-t", "--template", required=True, help="Path to template image")
