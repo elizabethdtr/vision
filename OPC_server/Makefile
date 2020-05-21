@@ -1,4 +1,4 @@
-all: myServer serverVariables VariablesToProcesses
+all: myServer serverVariables VariablesToProcesses myServerUpdated
 
 .PHONY: clean
 
@@ -14,7 +14,11 @@ serverVariables: serverVariables.c
 VariablesToProcesses: VariablesToProcesses.c
 	gcc -std=c99 VariablesToProcesses.c -o VariablesToProcesses -lopen62541 
 	@echo VariablesToProcesses is built - compilation successful
-	
+
+myServerUpdated: myServer_updated.c
+	gcc -std=c99 myServer_updated.c -o myServerUpdated -lopen62541 
+	@echo myServerUpdated is built - compilation successful
+
 clean:
 	rm -f myServer
 	rm -f serverVariables

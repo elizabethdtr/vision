@@ -7,7 +7,6 @@ def func(grayA, grayB):
 	(score, diff) = ssim(grayA, grayB, full=True)
 	return score
 
-
 def test_ssim_with_small_difference():
 	imageA = cv2.imread("images_diff/ref.bmp")
 	imageB = cv2.imread("images_diff/diff_1.bmp")

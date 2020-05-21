@@ -21,8 +21,14 @@ args = vars(ap.parse_args())
 
 #load the image, convert it to grayscale, and detect edges
 template = cv2.imread(args["template"])
-roi = template[950:1500, 980:1450]
+templateResized = imutils.resize(template, width=677)
+
+#roi_sunglassesCaseBlue = templateResized[45:450, 165:310]
+#roi = templateResized[45:450, 165:310]
+roi = templateResized
+
 cv2.imshow("ROI", roi)
+
 roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
 roi = cv2.Canny(roi, 50, 200)
 (tH, tW) = roi.shape[:2]
